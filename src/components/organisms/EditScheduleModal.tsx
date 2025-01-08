@@ -16,14 +16,19 @@ type Props = {
   onRequestClose: () => void;
 };
 
-const app = document.createElement("div");
-app.id = "root";
 if (typeof window !== "undefined") {
+  const app = document.createElement("div");
+  app.id = "root";
   document.body.appendChild(app);
   Modal.setAppElement("#root");
 }
 
-export const EditScheduleModal = ({ editSchedule, scheduleList, setScheduleList, onRequestClose }: Props) => {
+export const EditScheduleModal = ({
+  editSchedule,
+  scheduleList,
+  setScheduleList,
+  onRequestClose,
+}: Props) => {
   const {
     register,
     handleSubmit,
@@ -49,7 +54,7 @@ export const EditScheduleModal = ({ editSchedule, scheduleList, setScheduleList,
 
   useEffect(() => {
     if (editSchedule) {
-      const currentEditSchedule = editSchedule; 
+      const currentEditSchedule = editSchedule;
       reset({
         id: currentEditSchedule.id,
         title: currentEditSchedule.title,
@@ -72,13 +77,22 @@ export const EditScheduleModal = ({ editSchedule, scheduleList, setScheduleList,
     reset();
   };
 
-
   return (
-    <Modal  style={modalStyle} isOpen={!!editSchedule} onRequestClose={onRequestClose}>
+    <Modal
+      style={modalStyle}
+      isOpen={!!editSchedule}
+      onRequestClose={onRequestClose}
+    >
       <h3 className="text-center text-3xl text-blue-800 font-bold pb-5">
         予定編集
       </h3>
-      <CreateAndEditForm onSubmit={onSubmit} errors={errors} submitText="編集" register={register} handleSubmit={handleSubmit} />
+      <CreateAndEditForm
+        onSubmit={onSubmit}
+        errors={errors}
+        submitText="編集"
+        register={register}
+        handleSubmit={handleSubmit}
+      />
     </Modal>
   );
 };

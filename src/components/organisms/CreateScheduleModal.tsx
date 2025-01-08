@@ -15,9 +15,9 @@ type Props = {
   setScheduleList: (scheduleList: Schedule[]) => void;
 };
 
+if (typeof window !== "undefined") {
 const app = document.createElement("div");
 app.id = "root";
-if (typeof window !== "undefined") {
   document.body.appendChild(app);
   Modal.setAppElement("#root");
 }
