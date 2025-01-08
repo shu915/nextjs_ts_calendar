@@ -15,10 +15,7 @@ type Props = {
   setScheduleList: (scheduleList: Schedule[]) => void;
 };
 
-const app = document.createElement("div");
-app.id = "root";
-document.body.appendChild(app);
-Modal.setAppElement("#root");
+
 
 export const CreateScheduleModal = ({
   isOpen,

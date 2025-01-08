@@ -7,7 +7,7 @@ import { CalendarTableHeader } from "./CalendarTableHeader";
 import { DateList, Schedule } from "../../types/calendar";
 import { getDateWithScheduleList } from "../../utils/getDateWithScheduleList";
 import { getDateList } from "../../utils/getDateList";
-
+import Modal from "react-modal";
 type Props = {
   initialCurrentDate: Date;
   initialDateList: DateList;
@@ -19,6 +19,13 @@ export const CalendarContent = ({
   initialDateList,
   initialScheduleList,
 }: Props) => {
+
+  if (typeof window !== "undefined") {
+    const app = document.createElement("div");
+    app.id = "root";
+      document.body.appendChild(app);
+    Modal.setAppElement("#root");
+    }
   const [currentDate, setCurrentDate] = useState<Date>(initialCurrentDate);
   const [dateList, setDateList] = useState<DateList>(initialDateList);
   const [scheduleList, setScheduleList] = useState<Schedule[]>(initialScheduleList);
