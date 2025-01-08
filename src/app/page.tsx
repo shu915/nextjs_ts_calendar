@@ -4,8 +4,8 @@ import { getDateList } from "@/utils/getDateList";
 
 export default function Home() {
   const initialCurrentDate = new Date();
-  const initialDateList = getDateList(initialCurrentDate);
-  const initialScheduleList = getScheduleList();  
+  const initialDateList = getDateList(initialCurrentDate, false);
+  const initialScheduleList = getScheduleList();
 
 
   return (
