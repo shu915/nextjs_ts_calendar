@@ -39,11 +39,9 @@ export const CalendarContent = ({
   return (
     <div>
       <CalendarNav
-        currentDate={currentDate}
-        dateList={dateList}
+        isWeek={isWeek}
         scheduleList={scheduleList}
         setCurrentDate={setCurrentDate}
-        setDateList={setDateList}
         setScheduleList={setScheduleList}
         setIsWeek={setIsWeek}
       />
