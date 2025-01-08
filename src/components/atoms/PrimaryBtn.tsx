@@ -13,7 +13,7 @@ const SIZE_MAPPING = {
 
 const COLOR_MAPPING = {
   blue: "bg-blue-800 text-white",
-  red: "bg-red-800 text-white"
+  red: "bg-red-500 text-white"
 }
 
 export const PrimaryBtn = ({ children, onClick, size, color }: PrimaryBtnProps) => {

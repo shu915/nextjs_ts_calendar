@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { CalendarCellSchedule } from "../molecules/CalendarCellSchedule";
 import { getDate, getMonth, getYear } from "date-fns";
 import { ScheduleDetailModal } from "./ScheduleDetailModal";
+import { EditScheduleModal } from "./EditScheduleModal";
 
 type Props = {
   dateList: DateList;
@@ -16,10 +17,16 @@ type Props = {
 
 export const CalendarTableBody = ({ dateList, currentDate, scheduleList, setScheduleList }: Props) => {
   const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+  const [editSchedule, setEditSchedule] = useState<Schedule | null>(null);
 
-  const closeModal = () => {
+  const closeScheduleDetailModal = () => {
     setSelectedSchedule(null);
   }
+
+  const closeEditScheduleModal = () => {
+    setEditSchedule(null);
+  }
+
   return (<>
     <tbody>
       {dateList.map((week) => {
@@ -51,7 +58,20 @@ export const CalendarTableBody = ({ dateList, currentDate, scheduleList, setSche
         );
       })}
       </tbody>
-      <ScheduleDetailModal closeModal={closeModal} selectedSchedule={selectedSchedule} setSelectedSchedule={setSelectedSchedule} scheduleList={scheduleList} setScheduleList={setScheduleList} />
+    <ScheduleDetailModal
+      closeScheduleDetailModal={closeScheduleDetailModal}
+      selectedSchedule={selectedSchedule}
+      setSelectedSchedule={setSelectedSchedule}
+      scheduleList={scheduleList}
+      setScheduleList={setScheduleList}
+      setEditSchedule={setEditSchedule}
+    />
+    <EditScheduleModal
+      editSchedule={editSchedule}
+      onRequestClose={closeEditScheduleModal}
+      scheduleList={scheduleList}
+      setScheduleList={setScheduleList}
+    />
     </>
   );
 };

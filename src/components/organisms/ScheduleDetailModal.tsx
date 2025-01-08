@@ -2,22 +2,14 @@ import Modal from "react-modal";
 import { Schedule } from "../../types/calendar";
 import { format } from "date-fns";
 import { PrimaryBtn } from "../atoms/PrimaryBtn";
-
+import { modalStyle } from "../../styles/modalStyle";
 type Props = {
-  closeModal: () => void;
+  closeScheduleDetailModal: () => void;
   selectedSchedule: Schedule | null;
   setSelectedSchedule: React.Dispatch<React.SetStateAction<Schedule | null>>;
   scheduleList: Schedule[];
   setScheduleList: React.Dispatch<React.SetStateAction<Schedule[]>>;
-}
-
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    width: "30%",
-    transform: "translate(-50%, -50%)",
-  }
+  setEditSchedule: React.Dispatch<React.SetStateAction<Schedule | null>>;
 }
 
 const app = document.createElement("div");
@@ -25,7 +17,8 @@ app.id = "root";
 document.body.appendChild(app);
 Modal.setAppElement("#root");
 
-export const ScheduleDetailModal = ({ closeModal, selectedSchedule, setSelectedSchedule, scheduleList, setScheduleList }: Props) => {
+export const ScheduleDetailModal = ({ closeScheduleDetailModal,
+  selectedSchedule, setSelectedSchedule, scheduleList, setScheduleList, setEditSchedule }: Props) => {
 
   const onClickDeleteSchedule = () => {
     if (window.confirm("本当に削除しますか？")) {
@@ -37,10 +30,13 @@ export const ScheduleDetailModal = ({ closeModal, selectedSchedule, setSelectedS
   }
 
   const onClickEditSchedule = () => {
-    console.log("編集");
+    setEditSchedule(selectedSchedule);
+    setSelectedSchedule(null);
+    closeScheduleDetailModal();
+    
   }
   return (
-    <Modal isOpen={!!selectedSchedule} onRequestClose={closeModal} style={modalStyle}>
+    <Modal isOpen={!!selectedSchedule} onRequestClose={closeScheduleDetailModal} style={modalStyle}>
       {selectedSchedule && (
         <div className="flex flex-col items-center gap-8">
           <h3 className="text-center text-3xl font-bold pb-5">{selectedSchedule.title}</h3>

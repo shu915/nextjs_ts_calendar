@@ -7,12 +7,13 @@ import { format, parse } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 import { modalStyle } from "../../styles/modalStyle";
 import { scheduleSchema } from "../../types/ScheduleSchema";
+import { useEffect } from "react";
 import { CreateAndEditForm } from "./CreateAndEditForm";
 type Props = {
-  isOpen: boolean;
-  onRequestClose: () => void;
   scheduleList: Schedule[];
   setScheduleList: (scheduleList: Schedule[]) => void;
+  editSchedule: Schedule | null;
+  onRequestClose: () => void;
 };
 
 const app = document.createElement("div");
@@ -20,14 +21,7 @@ app.id = "root";
 document.body.appendChild(app);
 Modal.setAppElement("#root");
 
-export const CreateScheduleModal = ({
-  isOpen,
-  onRequestClose,
-  scheduleList,
-  setScheduleList,
-}: Props) => {
-  
-
+export const EditScheduleModal = ({ editSchedule, scheduleList, setScheduleList, onRequestClose }: Props) => {
   const {
     register,
     handleSubmit,
@@ -36,33 +30,50 @@ export const CreateScheduleModal = ({
   } = useForm<z.infer<typeof scheduleSchema>>({
     resolver: zodResolver(scheduleSchema),
     defaultValues: {
-      date: format(new Date(), "yyyy-MM-dd"),
+      id: editSchedule?.id,
+      title: editSchedule?.title,
+      date: editSchedule?.date ? format(editSchedule.date, "yyyy-MM-dd") : "",
+      description: editSchedule?.description,
     },
   });
 
-  const addSchedule = (schedule: Schedule) => {
-    const newScheduleList = [...scheduleList, schedule];
+  const updateSchedule = (schedule: Schedule) => {
+    const newScheduleList = scheduleList.map((s) =>
+      s.id === schedule.id ? schedule : s
+    );
     setScheduleList(newScheduleList);
     onRequestClose();
   };
 
+  useEffect(() => {
+    if (editSchedule) {
+      reset({
+        id: editSchedule.id,
+        title: editSchedule.title,
+        date: format(editSchedule.date, "yyyy-MM-dd"),
+        description: editSchedule.description,
+      });
+    }
+  }, [editSchedule, reset]);
+
   const onSubmit = (data: z.infer<typeof scheduleSchema>) => {
     const schedule: Schedule = {
-      id: uuidv4(),
+      id: editSchedule?.id ?? uuidv4(),
       title: data.title,
       date: parse(data.date, "yyyy-MM-dd", new Date()),
       description: data.description ?? "",
     };
-    addSchedule(schedule);
+    updateSchedule(schedule);
     reset();
   };
 
+
   return (
-    <Modal style={modalStyle} isOpen={isOpen} onRequestClose={onRequestClose}>
+    <Modal  style={modalStyle} isOpen={!!editSchedule} onRequestClose={onRequestClose}>
       <h3 className="text-center text-3xl text-blue-800 font-bold pb-5">
-        予定作成
+        予定編集
       </h3>
-      <CreateAndEditForm onSubmit={onSubmit} errors={errors} submitText="作成" register={register} handleSubmit={handleSubmit} />
+      <CreateAndEditForm onSubmit={onSubmit} errors={errors} submitText="編集" register={register} handleSubmit={handleSubmit} />
     </Modal>
   );
 };
