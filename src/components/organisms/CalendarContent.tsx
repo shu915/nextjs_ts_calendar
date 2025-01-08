@@ -22,9 +22,10 @@ export const CalendarContent = ({
   const [currentDate, setCurrentDate] = useState<Date>(initialCurrentDate);
   const [dateList, setDateList] = useState<DateList>(initialDateList);
   const [scheduleList, setScheduleList] = useState<Schedule[]>(initialScheduleList);
+  const [isWeek, setIsWeek] = useState<boolean>(false);
 
   useEffect(() => {
-    const newDateList = getDateList(currentDate);
+    const newDateList = getDateList(currentDate, isWeek);
     const newDateListWithSchedule = getDateWithScheduleList(
       newDateList,
       scheduleList
@@ -32,7 +33,7 @@ export const CalendarContent = ({
 
     setDateList(newDateListWithSchedule);
 
-  }, [initialScheduleList, currentDate, scheduleList]);
+  }, [initialScheduleList, currentDate, scheduleList, isWeek]);
 
 
   return (
@@ -44,6 +45,7 @@ export const CalendarContent = ({
         setCurrentDate={setCurrentDate}
         setDateList={setDateList}
         setScheduleList={setScheduleList}
+        setIsWeek={setIsWeek}
       />
       <table className="mt-5 w-full border-collapse">
         <CalendarTableHeader />
