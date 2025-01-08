@@ -3,6 +3,8 @@ import { CalendarContent } from "@/components/organisms/CalendarContent";
 import { getDateList } from "@/utils/getDateList";
 
 export default function Home() {
+
+
   const initialCurrentDate = new Date();
   const initialDateList = getDateList(initialCurrentDate, false);
   const initialScheduleList = getScheduleList();

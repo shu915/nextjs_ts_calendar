@@ -16,13 +16,6 @@ type Props = {
   onRequestClose: () => void;
 };
 
-if (typeof window !== "undefined") {
-  const app = document.createElement("div");
-  app.id = "root";
-  document.body.appendChild(app);
-  Modal.setAppElement("#root");
-}
-
 export const EditScheduleModal = ({
   editSchedule,
   scheduleList,

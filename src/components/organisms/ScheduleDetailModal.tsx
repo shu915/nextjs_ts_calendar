@@ -12,12 +12,6 @@ type Props = {
   setEditSchedule: React.Dispatch<React.SetStateAction<Schedule | null>>;
 };
 
-if (typeof window !== "undefined") {
-  const app = document.createElement("div");
-  app.id = "root";
-  document.body.appendChild(app);
-  Modal.setAppElement("#root");
-}
 
 export const ScheduleDetailModal = ({
   closeScheduleDetailModal,
