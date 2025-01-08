@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 import { CalendarNav } from "./CalendarNav";
 import { CalendarTableBody } from "./CalendarTableBody";
 import { CalendarTableHeader } from "./CalendarTableHeader";
-import { DateList, Schedule } from "@/types/calendar";
-import { getDateWithInitialScheduleList } from "@/utils/getDateWithInitialScheduleList";
-import { getDateWithScheduleList } from "@/utils/getDateWithScheduleList";
-import { getDateList } from "@/utils/getDateList";
+import { DateList, Schedule } from "../../types/calendar";
+import { getDateWithScheduleList } from "../../utils/getDateWithScheduleList";
+import { getDateList } from "../../utils/getDateList";
 
 type Props = {
   initialCurrentDate: Date;
@@ -34,7 +33,7 @@ export const CalendarContent = ({
     setDateList(newDateListWithSchedule);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialScheduleList, currentDate]);
+  }, [initialScheduleList, currentDate, scheduleList]);
 
 
   return (
@@ -42,8 +41,10 @@ export const CalendarContent = ({
       <CalendarNav
         currentDate={currentDate}
         dateList={dateList}
+        scheduleList={scheduleList}
         setCurrentDate={setCurrentDate}
         setDateList={setDateList}
+        setScheduleList={setScheduleList}
       />
       <table className="mt-5 w-full border-collapse">
         <CalendarTableHeader />

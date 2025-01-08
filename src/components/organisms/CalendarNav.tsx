@@ -2,13 +2,10 @@
 
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import { PrimaryBtn } from "@/components/atoms/PrimaryBtn";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { addMonths, subMonths } from "date-fns";
-// import { CreateScheduleModal } from "@/components/organisms/CreateScheduleModal";
+import { CreateScheduleModal } from "@/components/organisms/CreateScheduleModal";
 import { DateList, Schedule } from "@/types/calendar";
-import { getDateListIndex } from "@/utils/getDateListIndex";
-import { getDateList } from "@/utils/getDateList";
-import { getDateWithScheduleList } from "@/utils/getDateWithScheduleList";
 
 type Props = {
   currentDate: Date;
@@ -16,18 +13,18 @@ type Props = {
   scheduleList: Schedule[];
   setCurrentDate: Dispatch<SetStateAction<Date>>;
   setDateList: Dispatch<SetStateAction<DateList>>;
+  setScheduleList: Dispatch<SetStateAction<Schedule[]>>;
 };
 
 export const CalendarNav = ({
-  currentDate,
-  dateList,
+  
   scheduleList,
   setCurrentDate,
-  setDateList,
+  setScheduleList,
 }: Props) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const openModal = () => setIsOpen(true);
-  // const closeModal = () => setIsOpen(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const changeToday = () => setCurrentDate(new Date());
   const changePrevMonth = () =>
@@ -35,18 +32,7 @@ export const CalendarNav = ({
   const changeNextMonth = () =>
     setCurrentDate((prevDate) => addMonths(prevDate, 1));
 
-  // const addSchedule = (schedule: Schedule) => {
-  //   const newDateList = [...dateList];
-  //   const [firstIndex, secondIndex] = getDateListIndex(newDateList, schedule);
-  //   if (firstIndex === -1) {
-  //     return;
-  //   }
-  //   newDateList[firstIndex][secondIndex].schedules = [
-  //     ...newDateList[firstIndex][secondIndex].schedules,
-  //     schedule,
-  //   ];
-  //   setDateList(newDateList);
-  // };
+ 
 
   return (
     <>
@@ -64,10 +50,10 @@ export const CalendarNav = ({
             onClick={changeNextMonth}
           />
         </div>
-        <PrimaryBtn size="sm" onClick={() => null}>
+        <PrimaryBtn size="sm" onClick={openModal}>
           予定作成
         </PrimaryBtn>
-        {/* <CreateScheduleModal isOpen={isOpen} onRequestClose={closeModal} addSchedule={addSchedule} /> */}
+        <CreateScheduleModal isOpen={isOpen} onRequestClose={closeModal} scheduleList={scheduleList} setScheduleList={setScheduleList} />
       </div>
     </>
   );

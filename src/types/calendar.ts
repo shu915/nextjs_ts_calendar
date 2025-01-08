@@ -4,14 +4,8 @@ export type DateList = {
 }[][];
 
 export type Schedule = {
-  id: number;
+  id: string;
   date: Date;
-  title: string;
-  description: string;
-}
-
-export type NewSchedule = {
-  date: string;
   title: string;
   description: string;
 }
