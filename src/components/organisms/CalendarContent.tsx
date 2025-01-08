@@ -33,7 +33,7 @@ export const CalendarContent = ({
 
     setDateList(newDateListWithSchedule);
 
-  }, [initialScheduleList, currentDate, scheduleList, isWeek]);
+  }, [currentDate, scheduleList, isWeek]);
 
 
   return (

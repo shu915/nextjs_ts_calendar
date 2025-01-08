@@ -47,12 +47,15 @@ export const EditScheduleModal = ({ editSchedule, scheduleList, setScheduleList,
 
   useEffect(() => {
     if (editSchedule) {
+      const currentEditSchedule = editSchedule; 
       reset({
-        id: editSchedule.id,
-        title: editSchedule.title,
-        date: format(editSchedule.date, "yyyy-MM-dd"),
-        description: editSchedule.description,
+        id: currentEditSchedule.id,
+        title: currentEditSchedule.title,
+        date: format(currentEditSchedule.date, "yyyy-MM-dd"),
+        description: currentEditSchedule.description,
       });
+    } else {
+      reset();
     }
   }, [editSchedule, reset]);
 
