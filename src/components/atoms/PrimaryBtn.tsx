@@ -3,6 +3,7 @@ type PrimaryBtnProps = {
   children: React.ReactNode;
   onClick: () => void;
   size: "sm" | "lg"
+  color: "blue" | "red"
 }
 
 const SIZE_MAPPING = {
@@ -10,8 +11,13 @@ const SIZE_MAPPING = {
   lg: "p-4 text-lg"
 }
 
-export const PrimaryBtn = ({ children, onClick, size }: PrimaryBtnProps) => {
+const COLOR_MAPPING = {
+  blue: "bg-blue-800 text-white",
+  red: "bg-red-800 text-white"
+}
+
+export const PrimaryBtn = ({ children, onClick, size, color }: PrimaryBtnProps) => {
   return (
-    <button className={`bg-blue-800 text-white ${SIZE_MAPPING[size]} rounded-lg`} onClick={onClick}>{children}</button>
+    <button className={`${COLOR_MAPPING[color]} ${SIZE_MAPPING[size]} rounded-lg`} onClick={onClick}>{children}</button>
   )
 }

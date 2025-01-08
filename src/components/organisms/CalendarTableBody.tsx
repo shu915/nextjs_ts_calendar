@@ -1,18 +1,26 @@
 "use client";
 
 import { dateColor } from "@/libs/date";
-import { DateList } from "@/types/calendar";
-import React from "react";
+import { DateList, Schedule } from "@/types/calendar";
+import React, { useState } from "react";
 import { CalendarCellSchedule } from "../molecules/CalendarCellSchedule";
 import { getDate, getMonth, getYear } from "date-fns";
+import { ScheduleDetailModal } from "./ScheduleDetailModal";
 
 type Props = {
   dateList: DateList;
   currentDate: Date;
+  scheduleList: Schedule[];
+  setScheduleList: React.Dispatch<React.SetStateAction<Schedule[]>>;
 };
 
-export const CalendarTableBody = ({ dateList, currentDate }: Props) => {
-  return (
+export const CalendarTableBody = ({ dateList, currentDate, scheduleList, setScheduleList }: Props) => {
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+
+  const closeModal = () => {
+    setSelectedSchedule(null);
+  }
+  return (<>
     <tbody>
       {dateList.map((week) => {
         return (
@@ -36,12 +44,14 @@ export const CalendarTableBody = ({ dateList, currentDate }: Props) => {
                 >
                   {day.date.getDate()}
                 </span>
-                <CalendarCellSchedule schedules={day.schedules} />
+                <CalendarCellSchedule schedules={day.schedules} setSelectedSchedule={setSelectedSchedule} />
               </td>
             ))}
           </tr>
         );
       })}
-    </tbody>
+      </tbody>
+      <ScheduleDetailModal closeModal={closeModal} selectedSchedule={selectedSchedule} setSelectedSchedule={setSelectedSchedule} scheduleList={scheduleList} setScheduleList={setScheduleList} />
+    </>
   );
 };

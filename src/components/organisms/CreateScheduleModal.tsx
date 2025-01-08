@@ -92,7 +92,7 @@ export const CreateScheduleModal = ({ isOpen, onRequestClose, scheduleList, setS
           <TextArea id="description-form" {...register("description")} />
         </div>
         <div className="flex justify-center">
-          <PrimaryBtn size="lg" onClick={() => null}>
+          <PrimaryBtn size="lg" onClick={() => null} color="blue">
             作成
           </PrimaryBtn>
         </div>

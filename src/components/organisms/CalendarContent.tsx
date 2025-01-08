@@ -32,7 +32,6 @@ export const CalendarContent = ({
 
     setDateList(newDateListWithSchedule);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialScheduleList, currentDate, scheduleList]);
 
 
@@ -48,7 +47,7 @@ export const CalendarContent = ({
       />
       <table className="mt-5 w-full border-collapse">
         <CalendarTableHeader />
-        <CalendarTableBody dateList={dateList} currentDate={currentDate} />
+        <CalendarTableBody dateList={dateList} currentDate={currentDate} scheduleList={scheduleList} setScheduleList={setScheduleList} />
       </table>
     </div>
   );

@@ -42,7 +42,7 @@ export const CalendarNav = ({
             className="cursor-pointer text-blue-800 text-2xl"
             onClick={changePrevMonth}
           />
-          <PrimaryBtn size="sm" onClick={changeToday}>
+          <PrimaryBtn size="sm" onClick={changeToday} color="blue">
             今月
           </PrimaryBtn>
           <FaArrowAltCircleRight
@@ -50,7 +50,7 @@ export const CalendarNav = ({
             onClick={changeNextMonth}
           />
         </div>
-        <PrimaryBtn size="sm" onClick={openModal}>
+        <PrimaryBtn size="sm" onClick={openModal} color="blue">
           予定作成
         </PrimaryBtn>
         <CreateScheduleModal isOpen={isOpen} onRequestClose={closeModal} scheduleList={scheduleList} setScheduleList={setScheduleList} />
