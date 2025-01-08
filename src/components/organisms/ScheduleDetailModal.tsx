@@ -14,8 +14,10 @@ type Props = {
 
 const app = document.createElement("div");
 app.id = "root";
-document.body.appendChild(app);
-Modal.setAppElement("#root");
+if (typeof window !== "undefined") {
+  document.body.appendChild(app);
+  Modal.setAppElement("#root");
+}
 
 export const ScheduleDetailModal = ({ closeScheduleDetailModal,
   selectedSchedule, setSelectedSchedule, scheduleList, setScheduleList, setEditSchedule }: Props) => {
