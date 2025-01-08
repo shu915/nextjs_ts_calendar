@@ -8,6 +8,7 @@ import { DateList, Schedule } from "../../types/calendar";
 import { getDateWithScheduleList } from "../../utils/getDateWithScheduleList";
 import { getDateList } from "../../utils/getDateList";
 import Modal from "react-modal";
+import { format } from "date-fns";
 type Props = {
   initialCurrentDate: Date;
   initialDateList: DateList;
@@ -44,8 +45,10 @@ export const CalendarContent = ({
 
 
   return (
-    <div>
-      <CalendarNav
+    <>
+      {!isWeek && <h2 className="text-2xl font-bold text-center mt-4">{format(currentDate, "yyyy年MM月")}</h2>}
+      <div>
+        <CalendarNav
         isWeek={isWeek}
         scheduleList={scheduleList}
         setCurrentDate={setCurrentDate}
@@ -57,5 +60,6 @@ export const CalendarContent = ({
         <CalendarTableBody dateList={dateList} currentDate={currentDate} scheduleList={scheduleList} setScheduleList={setScheduleList} />
       </table>
     </div>
+    </>
   );
 };
