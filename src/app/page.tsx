@@ -17,7 +17,6 @@ export default function Home() {
           Next.jsカレンダー
         </h1>
         <CalendarContent
-          initialCurrentDate={initialCurrentDate}
           initialDateList={initialDateList}
           initialScheduleList={initialScheduleList}
         />

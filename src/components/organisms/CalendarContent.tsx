@@ -10,13 +10,11 @@ import { getDateList } from "../../utils/getDateList";
 import Modal from "react-modal";
 import { format } from "date-fns";
 type Props = {
-  initialCurrentDate: Date;
   initialDateList: DateList;
   initialScheduleList: Schedule[];
 };
 
 export const CalendarContent = ({
-  initialCurrentDate,
   initialDateList,
   initialScheduleList,
 }: Props) => {
@@ -27,7 +25,7 @@ export const CalendarContent = ({
       document.body.appendChild(app);
     Modal.setAppElement("#root");
     }
-  const [currentDate, setCurrentDate] = useState<Date>(initialCurrentDate);
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [dateList, setDateList] = useState<DateList>(initialDateList);
   const [scheduleList, setScheduleList] = useState<Schedule[]>(initialScheduleList);
   const [isWeek, setIsWeek] = useState<boolean>(false);
